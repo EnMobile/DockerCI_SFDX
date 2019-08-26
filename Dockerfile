@@ -11,8 +11,10 @@ ENV TESTLEVEL=RunLocalTests
 ENV SCRATCH_ORG_ALIAS=DreamHouse_Scratch
 ENV PACKAGEVERSION=""
 
-RUN openssl aes-256-cbc -d -md md5 -in assets/server.key.enc -out assets/server.key -k Password01 && \
- apt update && apt -y install jq && \
+ADD assets/server.key.enc /assets/
+
+RUN apt-get update && apt-get -y install apt-utils openssl wget jq xz-utils && \
+ openssl aes-256-cbc -d -md md5 -in /assets/server.key.enc -out assets/server.key -k Password01 && \
  mkdir sfdx && \
  wget -qO- $CLIURL | tar xJ -C sfdx --strip-components 1 && \
  "./sfdx/install" && \
