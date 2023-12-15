@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:12
 
 ENV CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
 ENV SFDX_AUTOUPDATE_DISABLE=false
